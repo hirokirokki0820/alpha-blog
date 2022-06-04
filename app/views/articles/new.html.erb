@@ -1,0 +1,9 @@
+<h1>Create a new article</h1>
+
+<%= render 'error_messages' %>
+
+<%= form_with model: @article do |f| %>
+  <%= render 'form', f: f %>
+<% end %>
+
+<%= link_to 'Return to articles listing',articles_path %>
