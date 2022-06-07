@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def show
+    # ↑before_action で :set_article メソッドを定義
+    # @article のインスタンス変数が使える
   end
 
   def index
@@ -19,7 +21,7 @@ class ArticlesController < ApplicationController
     #@article = Article.new(params[:article]) と同じ処理
     @article = Article.new(article_params)
     if @article.save
-      flash[:notice] = "Article was created successfully."
+      flash[:notice] = "新規投稿が完了しました。"
       redirect_to @article
     else
       render 'new', status: :unprocessable_entity
@@ -29,7 +31,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      flash[:notice] ="Article was updated successfully."
+      flash[:notice] ="記事を更新しました。"
       redirect_to @article
     else
       # p @article.errors

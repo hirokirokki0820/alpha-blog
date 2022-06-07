@@ -1,9 +1,4 @@
-<h1>Edit article</h1>
-
-<%= render 'error_messages' %>
-
+<h1 class="text-center mt-4">投稿を編集</h1>
 <%= form_with model: @article do |f| %>
   <%= render 'form', f: f, edit_flag: true %>
 <% end %>
-
-<%= link_to 'Cancel and return to articles listing',articles_path %>
