@@ -2,11 +2,13 @@
   <div class="row justify-content-center">
     <div class="col-10">
 
-    <% if local_assigns[:edit_flag].present? %>
-      <%= render 'shared/errors_edit', obj: @user %>
-    <% else %>
-      <%= render 'shared/errors_new', obj: @user %>
-    <% end %>
+    <% #if local_assigns[:edit_flag].present? %>
+      <%#= render 'shared/errors_edit', obj: @user %>
+    <%# else %>
+      <%#= render 'shared/errors_new', obj: @user %>
+    <%# end %>
+
+    <%= render(@user.new_record? ? 'shared/errors_new' : 'shared/errors_edit', obj: @user) %>
 
       <div class="shadow p-3 mb-3 bg-info rounded">
 
@@ -34,6 +36,7 @@
 
         <div class="mb-3 row justify-content-center">
           <%= f.submit class: "btn btn-outline-light btn-lg col-5" %>
+          <%#= f.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-outline-light btn-lg col-5") %>
         </div>
       </div>
 
