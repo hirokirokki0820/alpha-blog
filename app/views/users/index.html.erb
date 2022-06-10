@@ -1,5 +1,9 @@
 <h1 class="text-center mt-4">登録者一覧</h1>
 
+<div class="mt-3">
+<%= paginate @users %>
+</div>
+
 <div class="container">
   <% @users.each do |user| %>
     <div class="row justify-content-md-center">
@@ -28,6 +32,6 @@
   <% end %>
 </div>
 
-<p>
-<%= link_to 'Create new article', new_article_path, class: 'btn btn-outline-primary' %>
-</p>
+<div class="mt-3">
+<%= paginate @users %>
+</div>

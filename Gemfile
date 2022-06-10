@@ -54,8 +54,13 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# エラーメッセージの日本語化
+# error message from english to Japanese
 gem 'rails-i18n'
+
+# pagination
+gem 'kaminari'
+# gem 'will_paginate', '~> 3.3'
+
 
 group :development, :test do
   gem "sqlite3", "~> 1.4"
