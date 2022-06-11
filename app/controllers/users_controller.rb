@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show
-    @articles = @user.articles.page(params[:page]).per(5)
+    @articles = @user.articles.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def index
-    @users = User.all.page(params[:page]).per(5)
+    @users = User.all.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def new

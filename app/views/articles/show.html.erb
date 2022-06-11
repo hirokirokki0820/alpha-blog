@@ -10,11 +10,13 @@
           </div>
           <div class="card-body">
             <div class="card-text text-start"><%= simple_format(@article.description) %></div>
-            <%= link_to "編集", edit_article_path(@article), class: "btn btn-outline-info" %>
-            <%= link_to "削除", article_path(@article), class: "btn btn-outline-danger", data: {
-        turbo_method: :delete,
-        turbo_confirm: '本当に削除しますか？'
-        } %>
+            <% if logged_in? && @article.user == current_user %>
+              <%= link_to "編集", edit_article_path(@article), class: "btn btn-outline-info" %>
+              <%= link_to "削除", article_path(@article), class: "btn btn-outline-danger", data: {
+              turbo_method: :delete,
+              turbo_confirm: '本当に削除しますか？'
+              } %>
+            <% end %>
           </div>
           <div class="card-footer text-muted">
             <small>作成日 <%= l @article.created_at %>,

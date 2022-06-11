@@ -20,7 +20,9 @@
             投稿数：<%= user.articles.count %>
             </p>
             <%= link_to "プロフィール詳細", user, class: "btn btn-outline-success" %>
-            <%= link_to "編集", edit_user_path(user), class: "btn btn-outline-info" %>
+            <% if logged_in? && user == current_user %>
+              <%= link_to "編集", edit_user_path(user), class: "btn btn-outline-info" %>
+            <% end %>
           </div>
           <div class="card-footer text-muted">
             <small>登録日 <%= l user.created_at %>,

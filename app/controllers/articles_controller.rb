@@ -8,7 +8,8 @@ class ArticlesController < ApplicationController
 
   def index
     #@articles = Article.paginate(page: params[:page], per_page: 5)
-    @articles = Article.all.page(params[:page]).per(5)
+    @articles = Article.all.page(params[:page]).per(5).order(created_at: :desc)
+    # .order(created_at: :desc) で新しい順に並び替え
   end
 
   def new
@@ -22,7 +23,6 @@ class ArticlesController < ApplicationController
     #@article = Article.new(params[:article]) と同じ処理
     @article = Article.new(article_params)
     @article.user = current_user
-    p "この記事を書いたユーザー情報：#{@article.user.username}"
     if @article.save
       flash[:notice] = "新規投稿が完了しました。"
       redirect_to @article
