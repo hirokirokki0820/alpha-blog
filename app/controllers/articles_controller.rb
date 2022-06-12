@@ -62,7 +62,7 @@ class ArticlesController < ApplicationController
     end
 
     def require_same_user
-      if current_user != @article.user
+      if current_user != @article.user && !current_user.admin?
         flash[:alert] = "許可されていない操作です。投稿の編集、削除は投稿者ご自身のみ可能です。"
         redirect_to @article
       end

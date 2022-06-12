@@ -13,7 +13,7 @@
             <p class="card-text"><%= truncate(article.description, length: 100) %></p>
             <%= link_to "詳細", article_path(article), class: "btn btn-outline-success" %>
 
-            <% if logged_in? && article.user == current_user %>
+            <% if logged_in? && (article.user == current_user || current_user.admin?) %>
               <%= link_to "編集", edit_article_path(article), class: "btn btn-outline-info" %>
               <%= link_to "削除", article_path(article), class: "btn btn-outline-danger", data: {
               turbo_method: :delete,

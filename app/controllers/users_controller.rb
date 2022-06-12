@@ -40,7 +40,10 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    session[:user_id] = nil
+    if !current_user.admin?
+      session[:user_id] = nil
+      # if @user == current_user でもOK
+    end
     flash[:notice] = "アカウント、および関連する全ての投稿が削除されました。"
     redirect_to articles_path
   end
@@ -55,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user
+    if current_user != @user && !current_user.admin?
       flash[:alert] = "許可されていない操作です。プロフィールの編集、削除は作成者ご自身のみ可能です。"
       redirect_to @user
     end
