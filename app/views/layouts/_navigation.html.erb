@@ -29,10 +29,11 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "プロフィール詳細", user_path(current_user), class: "dropdown-item" %>
               <%= link_to "プロフィールを編集する", edit_user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "アカウントを削除する", user_path(current_user), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか? (実行後の取り消しはできません）" } %>
             </ul>
           </li>
           <li class="nav-item">
-            <%= link_to "ログアウト", logout_path, class: "nav-link", data: { turbo_method: :delete, turbo_confirm: '本当にログアウトしますか？' } %>
+            <%= link_to "ログアウト", logout_path, class: "nav-link", data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" } %>
           </li>
         <% else %>
           <li class="nav-item">

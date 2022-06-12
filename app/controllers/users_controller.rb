@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:edit, :update]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
     @articles = @user.articles.page(params[:page]).per(5).order(created_at: :desc)
@@ -38,6 +38,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+    flash[:notice] = "アカウント、および関連する全ての投稿が削除されました。"
+    redirect_to articles_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :password)
@@ -49,7 +56,7 @@ class UsersController < ApplicationController
 
   def require_same_user
     if current_user != @user
-      flash[:alert] = "許可されていない操作です。プロフィールの編集、削除は投稿者ご自身のみ可能です。"
+      flash[:alert] = "許可されていない操作です。プロフィールの編集、削除は作成者ご自身のみ可能です。"
       redirect_to @user
     end
   end
