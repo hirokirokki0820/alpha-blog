@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update]
 
   def show
     @articles = @user.articles.page(params[:page]).per(5).order(created_at: :desc)
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "ユーザー情報の編集に成功しました。"
+      flash[:notice] = "プロフィールの編集に成功しました。"
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
@@ -43,6 +45,13 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "許可されていない操作です。プロフィールの編集、削除は投稿者ご自身のみ可能です。"
+      redirect_to @user
+    end
   end
 
 end

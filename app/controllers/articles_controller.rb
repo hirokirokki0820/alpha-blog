@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
     # ↑before_action で :set_article メソッドを定義
@@ -57,6 +59,13 @@ class ArticlesController < ApplicationController
     # Strong Parameters
     def article_params
       params.require(:article).permit(:title, :description)
+    end
+
+    def require_same_user
+      if current_user != @article.user
+        flash[:alert] = "許可されていない操作です。投稿の編集、削除は投稿者ご自身のみ可能です。"
+        redirect_to @article
+      end
     end
 
 end
