@@ -2,7 +2,6 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   has_many :articles, dependent: :destroy
   # dependent: :destroy → アカウントを削除したら、それに関連する記事も同時に削除する
-  # 例） hiroki のアカウントを削除すると同時に、hirokiが投稿してきた記事も全て削除する
 
   validates :username, presence: true,
                       uniqueness: true,
