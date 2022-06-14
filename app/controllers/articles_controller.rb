@@ -22,7 +22,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    debugger
     #@article = Article.new(params[:article]) と同じ処理
     @article = Article.new(article_params)
     @article.user = current_user
