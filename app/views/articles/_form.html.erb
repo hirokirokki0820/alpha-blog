@@ -26,6 +26,14 @@
           </div>
         </div>
 
+        <div class="mb-3 row">
+          <%= f.label "カテゴリー", class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.collection_select :category_ids, Category.all.order(:name), :id, :name,
+            { prompt: "カテゴリーを選択してください（任意）"}, { multiple: true, size: 3, class: "form-select shadow rounded" } %>
+          </div>
+        </div>
+
         <div class="mb-3 row justify-content-center">
           <%= f.submit class: "btn btn-outline-light btn-lg col-5" %>
         </div>
