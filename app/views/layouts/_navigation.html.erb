@@ -16,9 +16,20 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "投稿一覧ページ", articles_path, class: "dropdown-item" %>
-              <%= link_to "新規投稿", new_article_path, class: "dropdown-item" %>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <% if logged_in? %>
+                <%= link_to "新規投稿", new_article_path, class: "dropdown-item" %>
+              <% end %>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              カテゴリー
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "カテゴリー一覧", categories_path, class: "dropdown-item" %>
+              <% if logged_in? && current_user.admin? %>
+                <%= link_to "新規カテゴリー作成", new_category_path, class: "dropdown-item" %>
+              <% end %>
             </ul>
           </li>
 
