@@ -15,6 +15,20 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      flash[:notice] = "カテゴリー名を更新しました。"
+      redirect_to @category
+    else
+      render 'edit', status: :unprocessable
+    end
+  end
+
   def index
     @categories = Category.all.page(params[:page]).per(5).order(created_at: :desc)
   end
