@@ -21,6 +21,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @articles = @category.articles.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   private
